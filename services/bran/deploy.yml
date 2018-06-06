@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bran
+  labels:
+    app: bran
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bran
+  template:
+    metadata:
+      labels:
+        app: bran
+    spec:
+      containers:
+      - name: bran
+        image: bran:v1
+        ports:
+        - containerPort: 8080
