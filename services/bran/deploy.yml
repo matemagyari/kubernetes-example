@@ -4,6 +4,7 @@ metadata:
   name: bran
   labels:
     app: bran
+    application: got
 spec:
   replicas: 2
   selector:
@@ -16,6 +17,23 @@ spec:
     spec:
       containers:
       - name: bran
-        image: bran:v1
+        image: bran:v3
         ports:
-        - containerPort: 8080
+        - containerPort: 80
+---
+#Expose bran to the external world
+kind: Service
+apiVersion: v1
+metadata:
+  name: bran-service
+  labels:
+    application: got
+spec:
+  selector:
+    app: bran
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
