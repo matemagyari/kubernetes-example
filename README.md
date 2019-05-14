@@ -11,23 +11,31 @@
 
 - build Docker images
 ```
-docker build -t hodor:v3 /Users/david/IdeaProjects/kubernetes-example/services/hodor/ &&
-docker build -t bran:v3 /Users/david/IdeaProjects/kubernetes-example/services/bran/
+docker build -t hodor:v3 /Users/david/IdeaProjects/kubernetes-example/services/got/hodor/ &&
+docker build -t bran:v6 /Users/david/IdeaProjects/kubernetes-example/services/got/bran/
 ```
 - start up
 ```
-kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/hodor/deploy.yml &&
-kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/bran/deploy.yml
+kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/got/hodor/deploy.yml &&
+kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/got/bran/deploy.yml
 ```
-- `kubectl delete deployments,services -l application=got`
+
+- `kubectl delete deployments,services,pods -l application=got`
+
+- `kubectl delete deployments,services,pods -l app=bran`
 
 - you can see the service on http://192.168.64.3:30065/
 
 - full restart
 ```
-kubectl delete deployments,services -l application=got &&
-docker build -t hodor:v3 /Users/david/IdeaProjects/kubernetes-example/services/hodor/ &&
-docker build -t bran:v3 /Users/david/IdeaProjects/kubernetes-example/services/bran/ &&
-kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/hodor/deploy.yml &&
-kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/bran/deploy.yml
+kubectl delete deployments,services,pods -l application=got &&
+docker build --no-cache -t hodor:v3 /Users/david/IdeaProjects/kubernetes-example/services/got/hodor/ &&
+docker build --no-cache -t bran:v6 /Users/david/IdeaProjects/kubernetes-example/services/got/bran/ &&
+kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/got/hodor/deploy.yml &&
+kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/got/bran/deploy.yml
 ```
+
+FAQ
+
+- expose a running pod: port forwarding, or exposing it as NodePort, or properly put it behind a service
+- get url for a service: `minikube service <service_name> --url`
