@@ -10,10 +10,10 @@ spec:
   selector:
     app: hodor
   ports:
-  - name: http
-    protocol: TCP
-    port: 80
-    targetPort: 8080
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
   type: ClusterIP
 
 ---
@@ -29,10 +29,10 @@ spec:
   selector:
     app: hodor
   ports:
-  - name: http
-    protocol: TCP
-    port: 80
-    targetPort: 8080
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
   type: LoadBalancer
 
 ---
@@ -55,7 +55,23 @@ spec:
         application: got
     spec:
       containers:
-      - name: hodor
-        image: hodor:v3
-        ports:
-        - containerPort: 80
+        - name: hodor
+          image: hodor:v3
+          ports:
+            - name: nodejs-port
+              containerPort: 80
+            - name: http-port
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http-port #not sure why not on the nodejs-port
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
+          readinessProbe: #if it fails the container won't be restarted, its ip is removed from Service
+            httpGet:
+              path: /
+              port: http-port #not sure why not on the nodejs-port
+            initialDelaySeconds: 2
+            timeoutSeconds: 5
+

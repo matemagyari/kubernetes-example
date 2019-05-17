@@ -29,8 +29,8 @@ kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/got/bran
 - full restart
 ```
 kubectl delete deployments,services,pods -l application=got &&
-docker build --no-cache -t hodor:v3 /Users/david/IdeaProjects/kubernetes-example/services/got/hodor/ &&
-docker build --no-cache -t bran:v6 /Users/david/IdeaProjects/kubernetes-example/services/got/bran/ &&
+docker build -t hodor:v3 /Users/david/IdeaProjects/kubernetes-example/services/got/hodor/ &&
+docker build -t bran:v6 /Users/david/IdeaProjects/kubernetes-example/services/got/bran/ &&
 kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/got/hodor/deploy.yml &&
 kubectl create -f /Users/david/IdeaProjects/kubernetes-example/services/got/bran/deploy.yml
 ```

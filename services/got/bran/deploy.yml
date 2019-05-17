@@ -58,4 +58,5 @@ spec:
         - name: bran
           image: bran:v6
           ports:
-            - containerPort: 80
+            - name: nodejs-port
+              containerPort: 80
