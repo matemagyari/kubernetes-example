@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-configmap
+  labels:
+    app: configmap-example
+data:
+  # Configuration values can be set as key-value properties
+  http_response: hello
+
+  # Or set as complete file contents (even JSON!)
+  keys: |
+    name.first=John
+    name.last=Smith
