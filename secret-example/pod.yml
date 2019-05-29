@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-example-pod
+  labels:
+    app: secret-example
+spec:
+  containers:
+    - name: secret-example
+      image: secret-example:v1
+      env:
+        - name: SECRET_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username
+
