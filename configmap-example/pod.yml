@@ -8,9 +8,6 @@ spec:
   containers:
     - name: configmap-example
       image: configmap-example:v1
-      ports:
-        - name: nodejs-port
-          containerPort: 80
       envFrom:
         - configMapRef:
             name: example-configmap
