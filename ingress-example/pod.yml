@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ingress-example-pod
+  labels:
+    app: ingress-example
+spec:
+  containers:
+    - name: ingress-example
+      image: ingress-example:v1
+      ports:
+        - name: nodejs-port
+          containerPort: 80
+        - name: http-port
+          containerPort: 8080
