@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: volume-example-pod
+  labels:
+    app: volume-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: volume-example
+  template:
+    metadata:
+      name: volume-example-pod
+      labels:
+        app: volume-example
+    spec:
+      containers:
+        - name: volume-example
+          image: volume-example:v1
+          volumeMounts:
+            - name: test-storage
+              mountPath: /data/test
+      volumes:
+        - name: test-storage
+          emptyDir: {}

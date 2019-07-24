@@ -5,7 +5,7 @@ console.log('I am starting');
 var handleRequest = function(request, response) {
   console.log('Received request for URL: ' + request.url);
   response.writeHead(200);
-  response.end('Hello World Again and again!');
+  response.end('Hello');
 };
 var www = http.createServer(handleRequest);
 www.listen(8080);

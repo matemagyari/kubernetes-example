@@ -2,6 +2,8 @@ kind: Service
 apiVersion: v1
 metadata:
   name: hello-world
+  labels:
+    app: hello-world
 spec:
   selector:
     app: hello-world
